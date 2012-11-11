@@ -35,6 +35,55 @@ public class Bible {
 	private int free; 
 	private String thumbnail;
 	private String cover_updated_at;
+	
+	public Bible() {
+		super();
+	}
+	public Bible(int bookstore_category_id, int distributed_as, int track_free,
+			int track_paid, int translation_id, String name,
+			String name_abbreviated, String publisher, String title,
+			String info, String title_for_free, String info_for_free,
+			String copyright, String copyright_abbreviated, String splash_info,
+			String publisher_url, String translation_url, String language,
+			String download_available, String cost, String product_identifier,
+			String created_at, String updated_at, String offline_updated_at,
+			String splash_notice, int offline_only, int active, int legacy,
+			int deleted, int free, String thumbnail, String cover_updated_at) {
+		super();
+		this.bookstore_category_id = bookstore_category_id;
+		this.distributed_as = distributed_as;
+		this.track_free = track_free;
+		this.track_paid = track_paid;
+		this.translation_id = translation_id;
+		this.name = name;
+		this.name_abbreviated = name_abbreviated;
+		this.publisher = publisher;
+		this.title = title;
+		this.info = info;
+		this.title_for_free = title_for_free;
+		this.info_for_free = info_for_free;
+		this.copyright = copyright;
+		this.copyright_abbreviated = copyright_abbreviated;
+		this.splash_info = splash_info;
+		this.publisher_url = publisher_url;
+		this.translation_url = translation_url;
+		this.language = language;
+		this.download_available = download_available;
+		this.cost = cost;
+		this.product_identifier = product_identifier;
+		this.created_at = created_at;
+		this.updated_at = updated_at;
+		this.offline_updated_at = offline_updated_at;
+		this.splash_notice = splash_notice;
+		this.offline_only = offline_only;
+		this.active = active;
+		this.legacy = legacy;
+		this.deleted = deleted;
+		this.free = free;
+		this.thumbnail = thumbnail;
+		this.cover_updated_at = cover_updated_at;
+	}
+	
 	public int getId() {
 		return id;
 	}

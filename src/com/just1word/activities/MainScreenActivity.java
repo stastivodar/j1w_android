@@ -2,6 +2,7 @@ package com.just1word.activities;
 
 import com.just1word.R;
 import com.just1word.database.dao.BibleDataSourse;
+import com.just1word.database.entities.Bible;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -20,9 +21,13 @@ public class MainScreenActivity extends Activity {
         datasource.open();
         Log.d("database","OPEN DB");
         
+        Bible bible = new Bible();
+        bible.setActive(1);
+        bible.setCost("LOCI");
+        
         if (datasource != null) {
         	Log.d("database","Success");
-        	datasource.insert();
+        	datasource.insert(bible);
         }
         else {
         	Log.d("database","ERROR ");

@@ -60,7 +60,12 @@ public class BibleDataSourse implements BibleSchema{
 	public void close() {
 		dbHelper.close();
 	}
-	
+	public boolean insert(Bible bible) {
+		ContentValues cv = setContentValue(bible);
+		db.insert(BIBLE_TABLE, null, cv);
+		return true;
+	}
+
 	public List<Bible> getAllBibles(){
 		Cursor cursor = db.query(BIBLE_TABLE, null, null, null, null, null, null);
 		List<Bible> biblesList = new ArrayList<Bible>();
@@ -73,15 +78,52 @@ public class BibleDataSourse implements BibleSchema{
 		
 		return null;
 	}
-	public long insert(){
-		ContentValues cv = new ContentValues();
-		cv.put("bookstore_category_id", "sdf2");
-		return db.insert(DatabaseHelper.BIBLE_TABLE, null, cv);
-	}
+	
 	public String sizeDataBase(){
 		Cursor mCursor = db.query(DatabaseHelper.BIBLE_TABLE, null, null, null, null, null, null);
-		mCursor.moveToFirst();
+		mCursor.moveToLast();
 		return mCursor.getString(1);
 	}
-	
+	private ContentValues setContentValue(Bible b) {
+		ContentValues cv = new ContentValues();
+		cv.put(BOOKSTORE_CATEGORY_ID, b.getBookstore_category_id());
+		cv.put(DISTRIBUTED_AS, b.getDistributed_as());
+		cv.put(TRACK_FREE, b.getTrack_free());
+		cv.put(TRACK_PAID, b.getTrack_paid());
+		cv.put(TRANSLATION_ID, b.getTranslation_id());
+		cv.put(NAME, b.getName());
+		cv.put(NAME_ABBREVIATED, b.getName_abbreviated());
+		cv.put(PUBLISHER, b.getPublisher());
+		cv.put(TITLE, b.getTitle());
+		cv.put(INFO, b.getInfo());
+		cv.put(TITLE_FOR_FREE, b.getTitle_for_free());
+		cv.put(INFO_FOR_FREE, b.getInfo_for_free());
+		cv.put(COPYRIGHT, b.getCopyright());
+		cv.put(COPYRIGHT_ABBREVIATED, b.getCopyright_abbreviated());
+		cv.put(SPLASH_INFO, b.getSplash_info());
+		cv.put(PUBLISHER_URL, b.getPublisher_url());
+		cv.put(TRANSLATION_URL, b.getTranslation_url());
+		cv.put(LANGUAGE, b.getLanguage());
+		cv.put(DOWNLOAD_AVAILABLE, b.getDownload_available());
+		cv.put(COST, b.getCost());
+		cv.put(PRODUCT_IDENTIFIER, b.getProduct_identifier());
+		cv.put(CREATED_AT, b.getCreated_at());
+		cv.put(UPDATED_AT, b.getUpdated_at());
+		cv.put(OFFLINE_UPDATED_AT, b.getOffline_updated_at());
+		cv.put(SPLASH_NOTICE, b.getSplash_notice());
+		cv.put(OFFLINE_ONLY, b.getOffline_only());
+		cv.put(ACTIVE, b.getActive());
+		cv.put(LEGACY, b.getLegacy());
+		cv.put(DELETED, b.getDeleted());
+		cv.put(FREE, b.getFree());
+		cv.put(THUMBNAIL, b.getThumbnail());
+		cv.put(COVER_UPDATED_AT, b.getCover_updated_at());
+		return cv;
+	}
+	private Bible cursorToEntity(Cursor cursor) {
+		Bible b = new Bible();
+		b.setBookstore_category_id(cursor.getInt(colum_bookstore_category_id));
+		b.setDistributed_as(cursor.getInt(colum_distributed_as));
+		return b;
+	}
 }
