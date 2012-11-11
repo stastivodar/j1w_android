@@ -1,12 +1,17 @@
 package com.just1word.database.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.just1word.database.entities.Bible;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-public class BibleDataSourse {
+public class BibleDataSourse implements BibleSchema{
 	private static SQLiteDatabase db;
 	private static DatabaseHelper dbHelper;
 	
@@ -55,14 +60,28 @@ public class BibleDataSourse {
 	public void close() {
 		dbHelper.close();
 	}
+	
+	public List<Bible> getAllBibles(){
+		Cursor cursor = db.query(BIBLE_TABLE, null, null, null, null, null, null);
+		List<Bible> biblesList = new ArrayList<Bible>();
+		if(cursor != null){
+			cursor.moveToFirst();
+			while(!cursor.isAfterLast()){
+				cursor.moveToNext();
+			}
+		}
+		
+		return null;
+	}
 	public long insert(){
 		ContentValues cv = new ContentValues();
-		//cv.put("bookstore_category_id", "sdf2");
-		return 1;//db.insert(DatabaseHelper.BIBLE_TABLE, null, cv);
+		cv.put("bookstore_category_id", "sdf2");
+		return db.insert(DatabaseHelper.BIBLE_TABLE, null, cv);
 	}
 	public String sizeDataBase(){
 		Cursor mCursor = db.query(DatabaseHelper.BIBLE_TABLE, null, null, null, null, null, null);
 		mCursor.moveToFirst();
 		return mCursor.getString(1);
 	}
+	
 }

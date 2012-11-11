@@ -44,7 +44,7 @@ public interface BibleSchema {
 				DISTRIBUTED_AS + " INTEGER, " +
 				TRACK_FREE + " INTEGER, " +
 				TRACK_PAID + " INTEGER, " +
-				TRANSLATION_ID + " TEXT, " +
+				TRANSLATION_ID + " INTEGER, " +
 				NAME + " TEXT, " +
 				NAME_ABBREVIATED + " TEXT, " +
 				PUBLISHER + " TEXT, " +

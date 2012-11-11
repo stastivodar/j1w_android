@@ -9,7 +9,7 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper implements BibleSchema{
 	
 	final String LOG_TAG = "DatabaseLogs";
-	static final int DB_VERSION = 7;
+	static final int DB_VERSION = 2;
 	static final String DB_NAME = "just1word.db";
 	
 	public DatabaseHelper(Context context, String name, CursorFactory factory,
