@@ -1,5 +1,6 @@
 package com.just1word.database.dao;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,8 +54,9 @@ public class BibleDataSourse implements BibleSchema{
 		dbHelper = new DatabaseHelper(context);
 	}
 	
-	public void open() throws SQLException {
-		db = dbHelper.getWritableDatabase();
+	public void open() throws SQLException, IOException {
+		dbHelper.createDataBase();
+		dbHelper.openDataBase();
 	}
 	
 	public void close() {
@@ -80,7 +82,7 @@ public class BibleDataSourse implements BibleSchema{
 	}
 	
 	public String sizeDataBase(){
-		Cursor mCursor = db.query(DatabaseHelper.BIBLE_TABLE, null, null, null, null, null, null);
+		Cursor mCursor = db.query("ZBIBLE", null, null, null, null, null, null);
 		mCursor.moveToLast();
 		return mCursor.getString(1);
 	}

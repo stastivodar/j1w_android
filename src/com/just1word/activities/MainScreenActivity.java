@@ -1,11 +1,15 @@
 package com.just1word.activities;
 
+import java.io.IOException;
+
 import com.just1word.R;
 import com.just1word.database.dao.BibleDataSourse;
+import com.just1word.database.dao.DatabaseHelper;
 import com.just1word.database.entities.Bible;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.database.SQLException;
 import android.util.Log;
 import android.view.Menu;
 
@@ -17,28 +21,28 @@ public class MainScreenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         
-        datasource = new BibleDataSourse(this);
-        datasource.open();
-        Log.d("database","OPEN DB");
-        
-        Bible bible = new Bible();
-        bible.setActive(1);
-        bible.setCost("LOCI");
-        
-        if (datasource != null) {
-        	Log.d("database","Success");
-        	datasource.insert(bible);
+        DatabaseHelper myDbHelper = new DatabaseHelper(this);
+        myDbHelper = new DatabaseHelper(this);
+         
+        try {
+         
+        myDbHelper.createDataBase();
+         
+        } catch (IOException ioe) {
+         
+        throw new Error("Unable to create database");
+         
         }
-        else {
-        	Log.d("database","ERROR ");
+         
+        try {
+         
+        myDbHelper.openDataBase();
+         
+        }catch(SQLException sqle){
+         
+        throw sqle;
+         
         }
-        
-        Log.d("database",datasource.sizeDataBase() + "");
-        datasource.close();
-        datasource.open();
-        Log.d("database",datasource.sizeDataBase() + "");
-        datasource.close();
-        Log.d("database","CLOSE DB");
         
     }
 
